@@ -108,9 +108,13 @@ const Header = () => {
                                 const isActive = pathname === link.href
                                 if (link.isDropdown) {
                                     return (
-                                        <div className="relative" key={link.name}>
+                                        <div
+                                            className="relative"
+                                            key={link.name}
+                                            onMouseEnter={() => setIsServicesOpen(true)}
+                                            onMouseLeave={() => setIsServicesOpen(false)}
+                                        >
                                             <button
-                                                onClick={() => setIsServicesOpen(!isServicesOpen)}
                                                 className="text-gray-600 hover:text-black px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center"
                                             >
                                                 {link.name}
@@ -121,11 +125,11 @@ const Header = () => {
 
                                             {/* Dropdown Menu */}
                                             {isServicesOpen && (
-                                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-screen max-w-[900px] bg-[#111111] backdrop-blur-md rounded-lg shadow-xl border border-gray-700/50 py-4 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
-                                                    {serviceGroups.map((group) => (
+                                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-screen max-w-[900px] bg-[#111111] backdrop-blur-md rounded-lg shadow-xl border border-gray-700/50 py-4 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 items-start">
+                                                    {serviceGroups.map((group, groupIndex) => (
                                                         <div
                                                             key={group.category}
-                                                            className="pb-4 first:pt-0"
+                                                            className={`${groupIndex > 0 ? "border-t border-gray-700/50 pt-4 mt-4" : ""} pb-4`}
                                                         >
                                                             <h3 className="text-[#ffcb74] text-xs font-semibold uppercase tracking-wider mb-3">
                                                                 {group.category}
@@ -268,11 +272,10 @@ const Header = () => {
             </nav>
 
             {/* Overlay to close dropdowns when clicking outside */}
-            {(isServicesOpen || isMobileMenuOpen) && (
+            {isMobileMenuOpen && (
                 <div
                     className="fixed inset-0 z-40"
                     onClick={() => {
-                        setIsServicesOpen(false)
                         setIsMobileMenuOpen(false)
                     }}
                 />
