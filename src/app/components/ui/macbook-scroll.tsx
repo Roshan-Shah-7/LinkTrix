@@ -29,12 +29,14 @@ export const MacbookScroll = ({
     src,
     showGradient,
     title,
-    badge,
+    leftBadge,
+    rightBadge,
 }: {
     src?: string;
     showGradient?: boolean;
     title?: string | React.ReactNode;
-    badge?: React.ReactNode;
+    leftBadge?: React.ReactNode;
+    rightBadge?: React.ReactNode;
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -114,7 +116,8 @@ export const MacbookScroll = ({
                 {showGradient && (
                     <div className="absolute inset-x-0 bottom-0 z-50 h-40 w-full bg-gradient-to-t from-white via-white to-transparent dark:from-black dark:via-black"></div>
                 )}
-                {badge && <div className="absolute bottom-4 left-4">{badge}</div>}
+                {leftBadge && <div className="absolute bottom-4 left-4">{leftBadge}</div>}
+                {rightBadge && <div className="absolute bottom-4 right-4">{rightBadge}</div>}
             </div>
         </div>
     );
@@ -149,9 +152,9 @@ export const Lid = ({
                     }}
                     className="absolute inset-0 flex items-center justify-center rounded-lg bg-[#010101]"
                 >
-                    <span className="text-white">
-                        <AceternityLogo />
-                    </span>
+                    <h1 className="text-white text-2xl font-bold tracking-wider">
+                        LinkTrix.
+                    </h1>
                 </div>
             </div>
             <motion.div
@@ -165,12 +168,10 @@ export const Lid = ({
                 }}
                 className="absolute inset-0 h-96 w-[32rem] rounded-2xl bg-[#010101] p-2"
             >
-                <div className="absolute inset-0 rounded-lg bg-[#272729]" />
-                <img
-                    src={src as string}
-                    alt="aceternity logo"
-                    className="absolute inset-0 h-full w-full rounded-lg object-cover object-left-top"
-                />
+                <div className="absolute inset-0 rounded-lg" />
+                <div className="text-white">
+                    
+                </div>
             </motion.div>
         </div>
     );
