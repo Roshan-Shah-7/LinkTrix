@@ -21,6 +21,7 @@ const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isServicesOpen, setIsServicesOpen] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [servicesTimeout, setServicesTimeout] = useState<NodeJS.Timeout | null>(null)
     const pathname = usePathname()
 
     useEffect(() => {
@@ -31,6 +32,21 @@ const Header = () => {
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
+
+    const handleMouseEnterServices = () => {
+        if (servicesTimeout) {
+            clearTimeout(servicesTimeout)
+            setServicesTimeout(null)
+        }
+        setIsServicesOpen(true)
+    }
+
+    const handleMouseLeaveServices = () => {
+        const timeout = setTimeout(() => {
+            setIsServicesOpen(false)
+        }, 200) // 200ms delay
+        setServicesTimeout(timeout)
+    }
 
     const serviceGroups: ServiceGroup[] = [
         {
@@ -111,8 +127,8 @@ const Header = () => {
                                         <div
                                             className="relative"
                                             key={link.name}
-                                            onMouseEnter={() => setIsServicesOpen(true)}
-                                            onMouseLeave={() => setIsServicesOpen(false)}
+                                            onMouseEnter={handleMouseEnterServices}
+                                            onMouseLeave={handleMouseLeaveServices}
                                         >
                                             <button
                                                 className="text-gray-600 hover:text-black px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center"
@@ -124,33 +140,41 @@ const Header = () => {
                                             </button>
 
                                             {/* Dropdown Menu */}
-                                            {isServicesOpen && (
-                                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-screen max-w-[900px] bg-[#111111] backdrop-blur-md rounded-lg shadow-xl border border-gray-700/50 py-4 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 items-start">
-                                                    {serviceGroups.map((group, groupIndex) => (
-                                                        <div
-                                                            key={group.category}
-                                                            className={`${groupIndex > 0 ? "border-t border-gray-700/50 pt-4 mt-4" : ""} pb-4`}
-                                                        >
-                                                            <h3 className="text-[#ffcb74] text-xs font-semibold uppercase tracking-wider mb-3">
-                                                                {group.category}
-                                                            </h3>
-                                                            <div className="space-y-2">
-                                                                {group.services.map((service) => (
-                                                                    <Link
-                                                                        key={service.name}
-                                                                        href={service.href}
-                                                                        className="block p-2 rounded-md hover:bg-gray-700/50 transition-colors duration-200"
-                                                                        onClick={() => setIsServicesOpen(false)}
-                                                                    >
-                                                                        <div className="text-white text-sm font-medium">{service.name}</div>
-                                                                        <div className="text-gray-400 text-xs mt-1">{service.description}</div>
-                                                                    </Link>
-                                                                ))}
+                                            <AnimatePresence>
+                                                {isServicesOpen && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: -10 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        exit={{ opacity: 0, y: -10 }}
+                                                        transition={{ duration: 0.2 }}
+                                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-screen max-w-[900px] bg-[#111111] backdrop-blur-md rounded-lg shadow-xl border border-gray-700/50 py-4 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 items-start"
+                                                    >
+                                                        {serviceGroups.map((group, groupIndex) => (
+                                                            <div
+                                                                key={group.category}
+                                                                className="pb-4"
+                                                            >
+                                                                <h3 className="text-[#ffcb74] text-xs font-semibold uppercase tracking-wider mb-3">
+                                                                    {group.category}
+                                                                </h3>
+                                                                <div className="space-y-2">
+                                                                    {group.services.map((service) => (
+                                                                        <Link
+                                                                            key={service.name}
+                                                                            href={service.href}
+                                                                            className="block p-2 rounded-md hover:bg-gray-700/50 transition-colors duration-200"
+                                                                            onClick={() => setIsServicesOpen(false)}
+                                                                        >
+                                                                            <div className="text-white text-sm font-medium">{service.name}</div>
+                                                                            <div className="text-gray-400 text-xs mt-1">{service.description}</div>
+                                                                        </Link>
+                                                                    ))}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            )}
+                                                        ))}
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
                                         </div>
                                     )
                                 }

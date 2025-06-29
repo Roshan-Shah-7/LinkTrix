@@ -1,11 +1,12 @@
 import React from 'react'
+import ScrollMackContainer from '@/app/components/home/ScrollMackContainer'
 import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
     return (
-        <section className="hero max-w-7xl m-auto
-     h-screen flex flex-col justify-center items-center gap-6">
-            <button className='relative border-2 border-gray-100
+        <section className="hero max-w-7xl m-auto py-4
+     min-h-screen flex flex-col justify-center items-center gap-6">
+            <button className='relative mt-40 border-2 border-gray-100
              bg-gray-50 text-black px-6 py-2
              rounded-full shadow-sm overflow-hidden group'>
                 - Together we can. Together we will -
@@ -43,6 +44,7 @@ const Hero = () => {
                     </span>
                 </button>
             </div>
+            <ScrollMackContainer />
         </section>
     )
 }
