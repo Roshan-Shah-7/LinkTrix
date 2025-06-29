@@ -72,9 +72,16 @@ const Header = () => {
         },
     ]
 
-    const navLinks = [
+    interface NavLinkItem {
+        name: string;
+        href: string;
+        isDropdown?: boolean;
+    }
+
+    const navLinks: NavLinkItem[] = [
         { name: "Home", href: "/" },
         { name: "About", href: "/about" },
+        { name: "Services", href: "/services", isDropdown: true },
         { name: "Portfolio", href: "/portfolio" },
         { name: "Blog", href: "/blog" },
         { name: "Contact", href: "/contact" },
@@ -99,6 +106,50 @@ const Header = () => {
                         <div className="ml-10 flex items-baseline space-x-8">
                             {navLinks.map((link) => {
                                 const isActive = pathname === link.href
+                                if (link.isDropdown) {
+                                    return (
+                                        <div className="relative" key={link.name}>
+                                            <button
+                                                onClick={() => setIsServicesOpen(!isServicesOpen)}
+                                                className="text-gray-600 hover:text-black px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center"
+                                            >
+                                                {link.name}
+                                                <ChevronDown
+                                                    className={`ml-1 h-4 w-4 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`}
+                                                />
+                                            </button>
+
+                                            {/* Dropdown Menu */}
+                                            {isServicesOpen && (
+                                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-screen max-w-[900px] bg-[#111111] backdrop-blur-md rounded-lg shadow-xl border border-gray-700/50 py-4 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
+                                                    {serviceGroups.map((group) => (
+                                                        <div
+                                                            key={group.category}
+                                                            className="pb-4 first:pt-0"
+                                                        >
+                                                            <h3 className="text-[#ffcb74] text-xs font-semibold uppercase tracking-wider mb-3">
+                                                                {group.category}
+                                                            </h3>
+                                                            <div className="space-y-2">
+                                                                {group.services.map((service) => (
+                                                                    <Link
+                                                                        key={service.name}
+                                                                        href={service.href}
+                                                                        className="block p-2 rounded-md hover:bg-gray-700/50 transition-colors duration-200"
+                                                                        onClick={() => setIsServicesOpen(false)}
+                                                                    >
+                                                                        <div className="text-white text-sm font-medium">{service.name}</div>
+                                                                        <div className="text-gray-400 text-xs mt-1">{service.description}</div>
+                                                                    </Link>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )
+                                }
                                 return (
                                     <Link
                                         key={link.name}
@@ -110,48 +161,6 @@ const Header = () => {
                                     </Link>
                                 )
                             })}
-
-                            {/* Services Dropdown */}
-                            <div className="relative">
-                                <button
-                                    onClick={() => setIsServicesOpen(!isServicesOpen)}
-                                    className="text-gray-600 hover:text-black px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center"
-                                >
-                                    Services
-                                    <ChevronDown
-                                        className={`ml-1 h-4 w-4 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`}
-                                    />
-                                </button>
-
-                                {/* Dropdown Menu */}
-                                {isServicesOpen && (
-                                    <div className="absolute top-full left-0 mt-2 w-96 bg-gray-800/95 backdrop-blur-md rounded-lg shadow-xl border border-gray-700/50 py-4">
-                                        {serviceGroups.map((group, groupIndex) => (
-                                            <div
-                                                key={group.category}
-                                                className={`${groupIndex > 0 ? "border-t border-gray-700/50 pt-4" : ""} px-4 pb-4`}
-                                            >
-                                                <h3 className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-3">
-                                                    {group.category}
-                                                </h3>
-                                                <div className="space-y-2">
-                                                    {group.services.map((service) => (
-                                                        <Link
-                                                            key={service.name}
-                                                            href={service.href}
-                                                            className="block p-2 rounded-md hover:bg-gray-700/50 transition-colors duration-200"
-                                                            onClick={() => setIsServicesOpen(false)}
-                                                        >
-                                                            <div className="text-white text-sm font-medium">{service.name}</div>
-                                                            <div className="text-gray-400 text-xs mt-1">{service.description}</div>
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
                         </div>
                     </div>
 
@@ -183,6 +192,54 @@ const Header = () => {
                         <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-900/95 backdrop-blur-md rounded-lg mt-2 border border-gray-700/50 relative z-50">
                             {navLinks.map((link) => {
                                 const isActive = pathname === link.href
+                                if (link.isDropdown) {
+                                    return (
+                                        <div className="px-3 py-2" key={link.name}>
+                                            <button
+                                                onClick={() => setIsServicesOpen(!isServicesOpen)}
+                                                className="text-gray-300 hover:text-white text-base font-medium flex items-center w-full"
+                                            >
+                                                {link.name}
+                                                <ChevronDown
+                                                    className={`ml-1 h-4 w-4 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`}
+                                                />
+                                            </button>
+
+                                            <AnimatePresence>
+                                                {isServicesOpen && (
+                                                    <motion.div
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: "auto", opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.2 }}
+                                                        className="mt-2 pl-4 space-y-2 overflow-hidden"
+                                                    >
+                                                        {serviceGroups.map((group) => (
+                                                            <div key={group.category}>
+                                                                <h4 className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                                                                    {group.category}
+                                                                </h4>
+                                                                {group.services.map((service) => (
+                                                                    <Link
+                                                                        key={service.name}
+                                                                        href={service.href}
+                                                                        className="block text-gray-300 hover:text-white text-sm py-1 transition-colors duration-200"
+                                                                        onClick={() => {
+                                                                            setIsMobileMenuOpen(false)
+                                                                            setIsServicesOpen(false)
+                                                                        }}
+                                                                    >
+                                                                        {service.name}
+                                                                    </Link>
+                                                                ))}
+                                                            </div>
+                                                        ))}
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+                                    )
+                                }
                                 return (
                                     <Link
                                         key={link.name}
@@ -194,52 +251,6 @@ const Header = () => {
                                     </Link>
                                 )
                             })}
-
-                            {/* Mobile Services */}
-                            <div className="px-3 py-2">
-                                <button
-                                    onClick={() => setIsServicesOpen(!isServicesOpen)}
-                                    className="text-gray-300 hover:text-white text-base font-medium flex items-center w-full"
-                                >
-                                    Services
-                                    <ChevronDown
-                                        className={`ml-1 h-4 w-4 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`}
-                                    />
-                                </button>
-
-                                <AnimatePresence>
-                                    {isServicesOpen && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.2 }}
-                                            className="mt-2 pl-4 space-y-2 overflow-hidden"
-                                        >
-                                            {serviceGroups.map((group) => (
-                                                <div key={group.category}>
-                                                    <h4 className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2">
-                                                        {group.category}
-                                                    </h4>
-                                                    {group.services.map((service) => (
-                                                        <Link
-                                                            key={service.name}
-                                                            href={service.href}
-                                                            className="block text-gray-300 hover:text-white text-sm py-1 transition-colors duration-200"
-                                                            onClick={() => {
-                                                                setIsMobileMenuOpen(false)
-                                                                setIsServicesOpen(false)
-                                                            }}
-                                                        >
-                                                            {service.name}
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            ))}
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
 
                             {/* Mobile CTA */}
                             <div className="px-3 pt-4">
