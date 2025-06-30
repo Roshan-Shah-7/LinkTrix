@@ -7,8 +7,7 @@ export default function ScrollMackContainer() {
             <MacbookScroll
                 title={
                     <span>
-                        Our Finest Work — A True Collaboration. <br />
-                        Together, we achieved excellence.
+                        Some section
                     </span>
                 }
                 src={`/linear.webp`}

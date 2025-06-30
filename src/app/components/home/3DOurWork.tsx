@@ -38,6 +38,10 @@ const OurWork = () => {
     ];
     return (
         <div className="mx-auto my-10 w-full p-2">
+            <h1 className="mt-20 mb-10 text-center text-3xl font-bold text-neutral-800">
+                Our Finest Work — A True Collaboration. <br />
+                Together, we achieved excellence.
+            </h1>
             <ThreeDMarquee images={images} />
         </div>
     );

@@ -1,11 +1,13 @@
-import OurWork from "./components/home/3DOurWork";
 import Hero from "./components/home/Hero";
+import OurWork from "./components/home/3DOurWork";
+import ScrollMackContainer from '@/app/components/home/ScrollMackContainer'
 
 export default function Home() {
   return (
     <main>
       <Hero />
       <OurWork />
+      <ScrollMackContainer />
     </main>
   )
 }
