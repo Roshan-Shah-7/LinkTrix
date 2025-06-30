@@ -14,20 +14,16 @@ export default function RootClientLayout({
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 4000); // Simulate loading for 4 seconds
+    }, 6000);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
-      <Loader
-        isLoading={isLoading}
-        color="#6C2BD9" // Use the primary color for the loader
-        size={150}
-      />
+      <Loader isLoading={isLoading} />
       {!isLoading && (
-        <div> {/* Apply padding here */}
+        <div>
           <Header />
           {children}
         </div>
