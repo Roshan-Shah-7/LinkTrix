@@ -10,7 +10,7 @@ const Loading = ({ isLoading }: LoadingProps) => {
     if (!isLoading) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center bg-black justify-center z-50">
+        <div className="fixed inset-0 flex items-center bg-gray-100 justify-center z-50">
             <div className="p-4 rounded-xl w-[40%]">
                 <CpuArchitecture />
             </div>
