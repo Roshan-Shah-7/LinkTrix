@@ -7,7 +7,8 @@ export default function ScrollMackContainer() {
             <MacbookScroll
                 title={
                     <span>
-                        This Macbook is built with Tailwindcss. <br /> No kidding.
+                        Our Finest Work — A True Collaboration. <br />
+                        Together, we achieved excellence.
                     </span>
                 }
                 src={`/linear.webp`}
