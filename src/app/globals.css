@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 0px;
 }
 
 ::-webkit-scrollbar-track {
@@ -18,7 +18,7 @@
 }
 
 body {
-  background: #F6F6F6;
+  background: #ffffff;
   color: #2f2f2f;
 }
 

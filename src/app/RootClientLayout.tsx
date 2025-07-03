@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Loader from "./components/Loading"; // Import the Loader component
+import Footer from "./components/Footer";
 
 export default function RootClientLayout({
   children,
@@ -26,6 +27,7 @@ export default function RootClientLayout({
         <div>
           <Header />
           {children}
+          <Footer />
         </div>
       )}
     </>

@@ -1,6 +1,6 @@
 "use client";
 
-import { CpuArchitecture } from "@/components/ui/cpu-architecture"
+import { CpuArchitecture } from "@/app/components/ui/cpu-architecture"
 
 interface LoadingProps {
     isLoading: boolean;

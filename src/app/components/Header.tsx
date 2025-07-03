@@ -108,11 +108,11 @@ const Header = () => {
             className={`fixed py-4 top-0 left-0 right-0 z-[10000] ${isScrolled ? "lg:py-2" : "lg:py-4"} transition-all duration-300`}
         >
             <nav className={`mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300
-                ${isScrolled ? "max-w-6xl backdrop-blur-md border-2 rounded-full border-gray-200 py-1" : "max-w-7xl bg-transparent"}`}>
+                ${isScrolled ? "max-w-6xl backdrop-blur-md border-2 rounded-full border-gray-200 bg-white py-1" : "max-w-7xl bg-transparent"}`}>
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0">
-                        <Link href="/" className="text-black font-bold text-xl">
+                        <Link href="/" className="text-black font-bold text-xl ">
                             LinkTrix.
                         </Link>
                     </div>

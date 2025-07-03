@@ -1,6 +1,6 @@
 "use client"
 
-import { DynamicFrameLayout } from "@/components/ui/dynamic-frame-layout"
+import { DynamicFrameLayout } from "@/app/components/ui/dynamic-frame-layout"
 
 const demoFrames = [
     {
