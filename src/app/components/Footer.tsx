@@ -1,5 +1,7 @@
 import React from 'react'
 import TextPressure from './ui/TextPressure'
+import Link from 'next/link'
+
 
 const Footer = () => {
     return (
@@ -88,19 +90,13 @@ const Footer = () => {
 
                     <ul className="space-y-4 mt-6">
                         <li>
-                            <a href='javascript:void(0)' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">FAQ</a>
+                            <Link href='/faq' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">FAQ</Link>
                         </li>
                         <li>
-                            <a href='javascript:void(0)' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">Partners</a>
+                            <Link href='/sitemap' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">Sitemap</Link>
                         </li>
                         <li>
-                            <a href='javascript:void(0)' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">Sitemap</a>
-                        </li>
-                        <li>
-                            <a href='javascript:void(0)' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">Contact</a>
-                        </li>
-                        <li>
-                            <a href='javascript:void(0)' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">News</a>
+                            <Link href='/contact' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">Contact</Link>
                         </li>
                     </ul>
                 </div>
@@ -111,13 +107,10 @@ const Footer = () => {
             <div className="flex flex-wrap max-md:flex-col gap-4 max-w-7xl mx-auto">
                 <ul className="md:flex md:space-x-6 max-md:space-y-2">
                     <li>
-                        <a href='javascript:void(0)' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">Terms of Service</a>
+                        <Link href='/terms' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">Terms of Service</Link>
                     </li>
                     <li>
-                        <a href='javascript:void(0)' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">Privacy Policy</a>
-                    </li>
-                    <li>
-                        <a href='javascript:void(0)' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">Security</a>
+                        <Link href='/privacy' className="hover:text-white text-gray-400 text-sm font-normal transition-colors duration-300">Privacy Policy</Link>
                     </li>
                 </ul>
                 <p className="text-gray-400 text-sm md:ml-auto text-center md:text-right font-semibold">© {new Date().getFullYear()} LinkTrix. All rights reserved.</p>
