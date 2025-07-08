@@ -74,6 +74,11 @@ const Header = () => {
                     description: "SEO, Ads, Social Media, Content Strategy",
                 },
                 { name: "Branding", href: "/services/branding", description: "Logo, Visual Identity, Brand Strategy" },
+                {
+                    name: "Video/Photography",
+                    href: "/services/video-photography",
+                    description: "Video production, Photography, Editing",
+                },
             ],
         },
         {
@@ -130,14 +135,17 @@ const Header = () => {
                                             onMouseEnter={handleMouseEnterServices}
                                             onMouseLeave={handleMouseLeaveServices}
                                         >
-                                            <button
-                                                className="text-gray-600 hover:text-black px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center"
+                                            <Link
+                                                href={link.href}
+                                                onClick={() => setIsServicesOpen(false)}
+                                                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center cursor-pointer
+                                                    ${link.isDropdown && pathname.startsWith(link.href) ? "text-black font-bold after:absolute after:left-1/2 after:rounded-full after:-translate-x-1/2 after:bottom-0 after:h-[2px] after:w-[70%] after:bg-black after:transition-all after:duration-300" : "text-gray-600 hover:text-black"}`}
                                             >
                                                 {link.name}
                                                 <ChevronDown
                                                     className={`ml-1 h-4 w-4 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`}
                                                 />
-                                            </button>
+                                            </Link>
 
                                             {/* Dropdown Menu */}
                                             <AnimatePresence>
@@ -223,15 +231,20 @@ const Header = () => {
                                 if (link.isDropdown) {
                                     return (
                                         <div className="px-3 py-2" key={link.name}>
-                                            <button
-                                                onClick={() => setIsServicesOpen(!isServicesOpen)}
-                                                className="text-gray-300 hover:text-white text-base font-medium flex items-center w-full"
+                                            <Link
+                                                href={link.href}
+                                                onClick={() => {
+                                                    setIsMobileMenuOpen(false);
+                                                    setIsServicesOpen(false);
+                                                }}
+                                                className={`relative text-base font-medium transition-colors duration-200 flex items-center w-full
+                                                    ${pathname.startsWith(link.href) ? "text-white font-bold after:absolute after:left-0 after:top-0 after:h-[2px] after:w-full after:bg-white after:transition-all after:duration-300" : "text-gray-300 hover:text-white"}`}
                                             >
                                                 {link.name}
                                                 <ChevronDown
                                                     className={`ml-1 h-4 w-4 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`}
                                                 />
-                                            </button>
+                                            </Link>
 
                                             <AnimatePresence>
                                                 {isServicesOpen && (
