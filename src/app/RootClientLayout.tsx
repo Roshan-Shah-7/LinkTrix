@@ -10,7 +10,7 @@ export default function RootClientLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {

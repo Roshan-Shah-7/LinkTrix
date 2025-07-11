@@ -227,10 +227,10 @@ export default function PortfolioSection() {
   return (
     <section
       ref={sectionRef}
-      className="bg-gradient-to-br from-gray-50 via-slate-50/50 to-blue-50/30 relative overflow-hidden"
+      className="bg-gradient-to-br from-gray-50 via-slate-50/50 to-blue-50/30 relative overflow-hidden py-16 px-4 sm:px-6 lg:px-8"
     >
 
-      <div className="max-w-7xl mt-40 mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 mt-20 sm:mt-32 lg:mt-40">
         {/* Professional Header Section */}
         <div
           className={`text-center mb-20 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
@@ -240,173 +240,18 @@ export default function PortfolioSection() {
             Professional Portfolio
             <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
             Crafting Digital
             <span className="block bg-gradient-to-r from-blue-700 via-slate-700 to-blue-700 bg-clip-text text-transparent">
               Excellence
             </span>
           </h2>
-          <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed px-4">
             Discover our comprehensive portfolio showcasing innovative digital solutions that drive business growth and
             deliver measurable results across industries.
           </p>
         </div>
 
-        {/* Featured Projects Showcase */}
-        <div
-          className={`mb-20 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-        >
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-slate-900 mb-4">Featured Case Studies</h3>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-slate-600 mx-auto rounded-full"></div>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {featuredProjects.map((project, index) => (
-              <div
-                key={project.id}
-                className={`group transition-all duration-700 delay-${index * 200} ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}`}
-              >
-                <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white/90 backdrop-blur-sm">
-                  <div className="relative overflow-hidden">
-                    <Image
-                      src={project.image || "/placeholder.svg"}
-                      alt={project.title}
-                      width={400}
-                      height={280}
-                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                    {/* Professional Badge */}
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-white/95 text-slate-700 shadow-md border-0 font-medium">
-                        Featured Project
-                      </Badge>
-                    </div>
-
-                    {/* Impact Metric */}
-                    <div className="absolute top-4 right-4 bg-blue-600/90 text-white px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
-                      {project.impact}
-                    </div>
-
-                    {/* Action Overlay */}
-                    <div className="absolute bottom-4 left-4 right-4 transform translate-y-8 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
-                      <div className="flex gap-3">
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button
-                              size="sm"
-                              className="bg-white/95 text-slate-700 hover:bg-white shadow-md flex-1 font-medium"
-                            >
-                              <Eye className="w-4 h-4 mr-2" />
-                              View Details
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
-                            <DialogHeader className="text-center">
-                              <DialogTitle className="text-2xl text-slate-900">{project.title}</DialogTitle>
-                            </DialogHeader>
-                            <div className="grid md:grid-cols-2 gap-8">
-                              <div className="relative">
-                                <Image
-                                  src={project.image || "/placeholder.svg"}
-                                  alt={project.title}
-                                  width={600}
-                                  height={400}
-                                  className="w-full rounded-lg shadow-lg"
-                                />
-                                <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                                  {project.impact}
-                                </div>
-                              </div>
-                              <div className="space-y-6">
-                                <div className="flex items-center gap-4 text-sm text-slate-600">
-                                  <div className="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-lg">
-                                    <User className="w-4 h-4" />
-                                    <span className="font-medium">{project.client}</span>
-                                  </div>
-                                  <div className="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-lg">
-                                    <Calendar className="w-4 h-4" />
-                                    <span>{project.completedDate}</span>
-                                  </div>
-                                </div>
-                                <div>
-                                  <h4 className="font-semibold mb-3 text-lg text-slate-900">Project Overview</h4>
-                                  <p className="text-slate-600 leading-relaxed">{project.fullDescription}</p>
-                                </div>
-                                <div>
-                                  <h4 className="font-semibold mb-3 text-slate-900">Technologies & Tools</h4>
-                                  <div className="flex flex-wrap gap-2">
-                                    {project.technologies.map((tech, techIndex) => (
-                                      <Badge
-                                        key={tech}
-                                        variant="secondary"
-                                        className="bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors"
-                                      >
-                                        {tech}
-                                      </Badge>
-                                    ))}
-                                  </div>
-                                </div>
-                                <div className="flex gap-4 pt-4">
-                                  <Button
-                                    className="flex-1 bg-gradient-to-r from-blue-600 to-slate-600 hover:from-blue-700 hover:to-slate-700"
-                                    asChild
-                                  >
-                                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                                      <ExternalLink className="w-4 h-4 mr-2" />
-                                      View Live Project
-                                    </a>
-                                  </Button>
-                                  <Button
-                                    variant="outline"
-                                    className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50 bg-transparent"
-                                    asChild
-                                  >
-                                    <a href={project.caseStudyUrl}>Case Study</a>
-                                  </Button>
-                                </div>
-                              </div>
-                            </div>
-                          </DialogContent>
-                        </Dialog>
-                        <Button
-                          size="sm"
-                          className="bg-blue-600/95 text-white hover:bg-blue-700 shadow-md flex-1"
-                          asChild
-                        >
-                          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="w-4 h-4 mr-2" />
-                            Live Project
-                          </a>
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <CardContent className="p-6">
-                    <div className="mb-4">
-                      <Badge variant="outline" className="text-xs border-slate-300 text-slate-600 mb-3">
-                        {categories.find((cat) => cat.id === project.category)?.label}
-                      </Badge>
-                    </div>
-                    <h4 className="font-bold text-xl mb-3 text-slate-900 group-hover:text-blue-700 transition-colors duration-300">
-                      {project.title}
-                    </h4>
-                    <p className="text-slate-600 mb-4 line-clamp-2 leading-relaxed">{project.description}</p>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-700 font-medium bg-slate-100 px-3 py-1 rounded-full">
-                        {project.client}
-                      </span>
-                      <span className="text-slate-500">{project.completedDate}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Professional Category Filter */}
         <div
@@ -420,7 +265,7 @@ export default function PortfolioSection() {
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-slate-600 mx-auto rounded-full"></div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             {categories.map((category, index) => {
               const IconComponent = category.icon
               return (
@@ -452,7 +297,7 @@ export default function PortfolioSection() {
         </div>
 
         {/* Professional Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 px-4">
           {filteredProjects.map((project, index) => (
             <div
               key={project.id}
@@ -487,7 +332,7 @@ export default function PortfolioSection() {
                               <DialogTitle className="text-2xl text-slate-900">{project.title}</DialogTitle>
                             </DialogHeader>
                             <div className="grid md:grid-cols-2 gap-8">
-                              <div className="relative">
+                              <div className="relative col-span-full md:col-span-1">
                                 <Image
                                   src={project.image || "/placeholder.svg"}
                                   alt={project.title}
@@ -499,8 +344,8 @@ export default function PortfolioSection() {
                                   {project.impact}
                                 </div>
                               </div>
-                              <div className="space-y-6">
-                                <div className="flex items-center gap-4 text-sm text-slate-600">
+                              <div className="space-y-6 col-span-full md:col-span-1">
+                                <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
                                   <div className="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-lg">
                                     <User className="w-4 h-4" />
                                     <span className="font-medium">{project.client}</span>
@@ -528,7 +373,7 @@ export default function PortfolioSection() {
                                     ))}
                                   </div>
                                 </div>
-                                <div className="flex gap-4 pt-4">
+                                <div className="flex flex-col sm:flex-row gap-4 pt-4">
                                   <Button
                                     className="flex-1 bg-gradient-to-r from-blue-600 to-slate-600 hover:from-blue-700 hover:to-slate-700"
                                     asChild
@@ -586,8 +431,8 @@ export default function PortfolioSection() {
                   </h3>
                   <p className="text-slate-600 text-sm mb-4 line-clamp-2 leading-relaxed">{project.description}</p>
 
-                  <div className="flex items-center justify-between text-sm mb-4">
-                    <span className="text-slate-700 font-medium bg-slate-100 px-3 py-1 rounded-full">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-sm mb-4">
+                    <span className="text-slate-700 font-medium bg-slate-100 px-3 py-1 rounded-full mb-2 sm:mb-0">
                       {project.client}
                     </span>
                     <span className="text-slate-500">{project.completedDate}</span>
@@ -641,11 +486,11 @@ export default function PortfolioSection() {
               <Briefcase className="w-4 h-4" />
               Ready to Start Your Project?
             </div>
-            <h3 className="text-4xl md:text-5xl font-bold mb-6">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
               Let's Create Something
               <span className="block text-blue-300">Exceptional Together</span>
             </h3>
-            <p className="text-xl mb-10 opacity-90 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg mb-10 opacity-90 max-w-3xl mx-auto leading-relaxed px-4">
               Partner with our expert team to transform your vision into reality. We deliver innovative digital
               solutions that drive measurable business growth and exceed expectations.
             </p>
